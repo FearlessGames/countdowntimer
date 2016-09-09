@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown timer</title>
+
+    <script type="text/javascript"
+            src="fullscreen.js"></script>
+    <script type="text/javascript"
+            src="bartimer.js"></script>
+    <script type="text/javascript"
+            src="timer.js"></script>
+    <script type="application/javascript">
+        let app = {
+            startTimer: function() {
+                let canvasElement = document.getElementById('canvas');
+                let canvas = new Canvas(canvasElement);
+                canvas.resize();
+                let timer = new Timer(0, 10);
+                let bar = new BarTimer(canvasElement, timer);
+                let callback = function () {
+                    console.log(timer.completedPercentage);
+                    bar.render(canvas);
+                    window.requestAnimationFrame(callback);
+                };
+                window.requestAnimationFrame(callback);
+            },
+
+            goFullScreen: function () {
+
+            }
+        };
+
+    </script>
+
+</head>
+<body onload="app.startTimer()">
+<canvas id="canvas" width="1024" height="768"></canvas>
+
+<p><button onclick="app.goFullScreen();">Go Fullscreen</button></p>
+</body>
+</html>
