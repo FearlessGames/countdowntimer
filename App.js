@@ -7,7 +7,6 @@ class App {
         let bar = new BarTimer(timer, this.canvas);
         
         let callback = function () {
-            console.log(timer.completedPercentage);
             bar.render();
             window.requestAnimationFrame(callback);
         };

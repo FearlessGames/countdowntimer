@@ -3,6 +3,11 @@ class Timer {
         this.startTimestamp = Date.now();
         this.durationInMillis = ((minutes * 60) + seconds) * 1000;
         this.endTimeStamp = this.startTimestamp + this.durationInMillis;
+
+    }
+    
+    set onDoneCallback(callback) {
+        window.setTimeout(callback, this.millisLeft);
     }
 
     get completedPercentage() {
@@ -11,16 +16,20 @@ class Timer {
     }
 
     get timeLeft() {
-        const now = Date.now();
-        let millisLeft = Math.max(this.endTimeStamp - now, 0);
 
-        let secondsLeft = millisLeft / 1000;
+        let secondsLeft = this.millisLeft / 1000;
         let minLeft = Math.floor(secondsLeft / 60);
         secondsLeft = secondsLeft - (minLeft * 60);
         return {
-            done : millisLeft == 0,
+            done : this.millisLeft == 0,
             minutes: minLeft,
             seconds: secondsLeft
         };
+    }
+
+    get millisLeft() {
+        const now = Date.now();
+        let millisLeft = Math.max(this.endTimeStamp - now, 0);
+        return millisLeft;
     }
 }

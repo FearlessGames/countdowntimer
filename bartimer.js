@@ -4,6 +4,7 @@ class BarTimer {
         this.timer = timer;
         this.canvas = canvas;
         this.canvas.context.font = "50px sans-serif";
+        this.timer.onDoneCallback = this.onDone;
     }
 
     render() {
@@ -15,16 +16,16 @@ class BarTimer {
 
         let timeLeft = this.timer.timeLeft;
 
-        if (timeLeft.done && this.done == false) {
-            this.done = true;
-                        
-        }
 
         context.clearRect(0, 0, width, height);
         let percentage = this.timer.completedPercentage;
         context.fillText(timeLeft.minutes + ":" + timeLeft.seconds, leftMargin, height / 2 - 100);
         this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
         
+    }
+
+    onDone() {
+        console.log("Done");
     }
 
     drawBar(context, x, y, width, height, percentage) {
