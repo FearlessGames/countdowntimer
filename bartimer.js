@@ -30,18 +30,8 @@ class BarTimer {
         } else {
             context.fillText(timeLeft.minutes + ":" + timeLeft.seconds, leftMargin, height / 2 - 100);
         }
-
-        if(percentage > 0.8 && !this.done) {
-            this.color += 10;
-            if(this.color >= 99) {
-                this.color = 0;
-            }
-            context.fillStyle = "#" + this.color + "0000";
-        }
-
-        console.log(context.fillStyle + " " + this.color);
-        this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
         
+        this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
     }
 
     onDone() {
@@ -49,6 +39,16 @@ class BarTimer {
     }
 
     drawBar(context, x, y, width, height, percentage) {
+        context.strokeStyle = "#000000";
+        context.strokeRect(x - 4, y - 4, width + 8, height + 8);
+        if(percentage > 0.8 && !this.done) {
+            this.color += 10;
+            if(this.color >= 99) {
+                this.color = 0;
+            }
+            context.fillStyle = "#" + this.color + "0000";
+        }
+        
         context.fillRect(x, y, width * percentage, height);
         
     }
