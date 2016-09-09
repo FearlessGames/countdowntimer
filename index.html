@@ -17,7 +17,7 @@
                 let canvas = new Canvas(canvasElement);
                 canvas.resize();
                 let timer = new Timer(0, 10);
-                let bar = new BarTimer(canvasElement, timer);
+                let bar = new BarTimer(timer);
                 let callback = function () {
                     console.log(timer.completedPercentage);
                     bar.render(canvas);

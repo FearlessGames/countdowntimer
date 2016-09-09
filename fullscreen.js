@@ -11,11 +11,11 @@ class Canvas {
     }
 
     get width() {
-        return this.window.innerWidth;
+        return this.canvas.width;
     }
 
     get height() {
-        return this.window.innerHeight;
+        return this.canvas.height;
     }
 
 
