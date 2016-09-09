@@ -4,8 +4,12 @@ class BarTimer {
         this.timer = timer;
         this.canvas = canvas;
         this.canvas.context.font = "50px sans-serif";
-        this.timer.onDoneCallback = this.onDone;
+        let that = this
+        this.timer.onDoneCallback = function () {
+            that.onDone();
+        };
         this.color = 0;
+        this.done = false;
     }
 
     render() {
@@ -21,9 +25,13 @@ class BarTimer {
 
         context.clearRect(0, 0, width, height);
         let percentage = this.timer.completedPercentage;
-        context.fillText(timeLeft.minutes + ":" + timeLeft.seconds, leftMargin, height / 2 - 100);
+        if(this.done) {
+            context.fillText("Time's up!", leftMargin, height / 2 - 100);
+        } else {
+            context.fillText(timeLeft.minutes + ":" + timeLeft.seconds, leftMargin, height / 2 - 100);
+        }
 
-        if(percentage > 0.8 && !timeLeft.done) {
+        if(percentage > 0.8 && !this.done) {
             this.color += 10;
             if(this.color >= 99) {
                 this.color = 0;
@@ -37,7 +45,7 @@ class BarTimer {
     }
 
     onDone() {
-        console.log("Done");
+        this.done = true;
     }
 
     drawBar(context, x, y, width, height, percentage) {
