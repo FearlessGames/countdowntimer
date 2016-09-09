@@ -1,6 +1,5 @@
 class BarTimer {
-    var done = false;
-    
+
     constructor(timer, canvas) {
         this.timer = timer;
         this.canvas = canvas;
@@ -15,6 +14,11 @@ class BarTimer {
         let leftMargin = width * 0.04;
 
         let timeLeft = this.timer.timeLeft;
+
+        if (timeLeft.done && this.done == false) {
+            this.done = true;
+                        
+        }
 
         context.clearRect(0, 0, width, height);
         let percentage = this.timer.completedPercentage;
