@@ -10,33 +10,23 @@
             src="bartimer.js"></script>
     <script type="text/javascript"
             src="timer.js"></script>
+
+    <script type="application/javascript" src="App.js"></script>
+
     <script type="application/javascript">
-        let app = {
-            startTimer: function() {
-                let canvasElement = document.getElementById('canvas');
-                let canvas = new Canvas(canvasElement);
-                canvas.resize();
-                let timer = new Timer(0, 10);
-                let bar = new BarTimer(timer);
-                let callback = function () {
-                    console.log(timer.completedPercentage);
-                    bar.render(canvas);
-                    window.requestAnimationFrame(callback);
-                };
-                window.requestAnimationFrame(callback);
-            },
-
-            goFullScreen: function () {
-
-            }
-        };
-
+        var app = new App();
+        function startMe() {
+            let elementById = document.getElementById('canvas');
+            app.startTimer(elementById);
+        }
     </script>
 
 </head>
-<body onload="app.startTimer()">
+<body onload="startMe();">
 <canvas id="canvas" width="1024" height="768"></canvas>
 
-<p><button onclick="app.goFullScreen();">Go Fullscreen</button></p>
+<p>
+    <button onclick="app.goFullScreen();">Go Fullscreen</button>
+</p>
 </body>
 </html>
