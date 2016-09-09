@@ -23,7 +23,8 @@ class Timer {
         return {
             done : this.millisLeft == 0,
             minutes: minLeft,
-            seconds: secondsLeft
+            seconds: secondsLeft,
+            totalMillis: this.millisLeft
         };
     }
 
