@@ -4,10 +4,10 @@ class BarTimer {
         this.timer = timer;
         this.canvas = canvas;
         this.canvas.context.font = "50px sans-serif";
-        let that = this
-        this.timer.onDoneCallback = function () {
-            that.onDone();
+        this.timer.onDoneCallback = () => {
+            this.onDone();
         };
+        
         this.color = 0;
         this.done = false;
     }
