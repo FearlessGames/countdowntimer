@@ -4,7 +4,12 @@ class App {
         this.canvas = new Canvas(canvasRenderingElement);
         this.canvas.resize();
         let timer = new Timer(0, 10);
-        let bar = new BarTimer(timer, this.canvas);
+        const colorScheme = {
+            barMain: "#ff6a00",
+            barBorder: "#464646",
+            text: "#00b67d"
+        };
+        let bar = new BarTimer(timer, this.canvas, colorScheme);
         
         let callback = function () {
             bar.render();
