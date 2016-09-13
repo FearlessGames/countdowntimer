@@ -5,7 +5,7 @@ class BarTimer {
     constructor(timer, canvas, colorScheme) {
         this.timer = timer;
         this.canvas = canvas;
-        this.canvas.context.font = "50px sans-serif";
+        this.canvas.context.font = "100px sans-serif";
         this.timer.onDoneCallback = () => {
             this.onDone();
         };
@@ -46,7 +46,7 @@ class BarTimer {
             context.fillText(timeLeft.minutes + ":" + seconds, leftMargin, height / 2 - 100);
         }
 
-        this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
+        this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 250, percentage);
     }
 
 
