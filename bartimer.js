@@ -1,3 +1,5 @@
+const Color = net.brehaut.Color;
+
 class BarTimer {
 
     constructor(timer, canvas, colorScheme) {
@@ -8,7 +10,10 @@ class BarTimer {
             this.onDone();
         };
         this.colorScheme = colorScheme;
-        this.color = 0;
+        this.flashColorChange = {
+            currentValue: 0,
+            stride: 0.1
+        };
         this.done = false;
     }
 
@@ -51,17 +56,18 @@ class BarTimer {
     }
 
     drawBar(context, x, y, width, height, percentage) {
-        context.fillStyle = this.colorScheme.barMain;
         context.strokeStyle = this.colorScheme.barBorder;
         context.strokeRect(x - 4, y - 4, width + 8, height + 8);
         if(percentage > 0.8 && !this.done) {
-            this.color += 10;
-            if(this.color >= 99) {
-                this.color = 0;
+            this.flashColorChange.currentValue += this.flashColorChange.stride;
+            if(this.flashColorChange.currentValue >= 1 || this.flashColorChange.currentValue <= 0) {
+                this.flashColorChange.stride = -this.flashColorChange.stride;
             }
-            context.fillStyle = "#" + this.color + "0000";
         }
-        
+        const barMainColor = Color(this.colorScheme.barMain);
+        const barFlashColor = Color(this.colorScheme.barMainFlash);
+        let blend = barMainColor.blend(barFlashColor, this.flashColorChange.currentValue);
+        context.fillStyle = blend.toCSS();
         context.fillRect(x, y, width * percentage, height);
         
     }
