@@ -28,7 +28,10 @@ class BarTimer {
         if(this.done) {
             context.fillText("Time's up!", leftMargin, height / 2 - 100);
         } else {
-            context.fillText(timeLeft.minutes + ":" + timeLeft.seconds, leftMargin, height / 2 - 100);
+
+            let precision = timeLeft.minutes == 0 ? 1 : 0;
+            let seconds = parseFloat(timeLeft.seconds).toFixed(precision);
+            context.fillText(timeLeft.minutes + ":" + seconds, leftMargin, height / 2 - 100);
         }
         
         this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
