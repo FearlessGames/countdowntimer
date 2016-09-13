@@ -12,6 +12,12 @@ class BarTimer {
         this.done = false;
     }
 
+    static zeroPad(num, places) {
+        let integerPart = num.toString().match(/\d+/)[0];
+        let zero = places - integerPart.length + 1;
+        return new Array(+(zero > 0 && zero)).join("0") + num;
+    }
+
     render() {
         let context = this.canvas.context;
         let width = this.canvas.width;
@@ -30,12 +36,14 @@ class BarTimer {
         } else {
 
             let precision = timeLeft.minutes == 0 ? 1 : 0;
-            let seconds = parseFloat(timeLeft.seconds).toFixed(precision);
+            let seconds = BarTimer.zeroPad(parseFloat(timeLeft.seconds).toFixed(precision), 2);
             context.fillText(timeLeft.minutes + ":" + seconds, leftMargin, height / 2 - 100);
         }
         
         this.drawBar(context, leftMargin, height / 2, width - 2 * leftMargin, 50, percentage);
     }
+
+
 
     onDone() {
         this.done = true;
