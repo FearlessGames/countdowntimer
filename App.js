@@ -10,8 +10,9 @@ class App {
             barBorder: "#464646",
             text: "#00b67d"
         };
-        let bar = new BarTimer(timer, this.canvas, colorScheme);
-        
+        //let bar = new BarTimer(timer, this.canvas, colorScheme);
+        let bar = new PieTimer(timer, this.canvas, colorScheme);
+
         let callback = function () {
             bar.render();
             window.requestAnimationFrame(callback);
