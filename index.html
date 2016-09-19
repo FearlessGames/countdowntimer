@@ -26,7 +26,15 @@
     </script>
 
 </head>
-<body onload="startMe();">
+<!--<body onload="startMe();">-->
+<body>
+<form onsubmit="startMe()">
+    <input type="number" name="minutes"/>minutes <input type="number" name="seconds"/> seconds<br>
+    <input type="radio" name="visualstyle" value="bar" checked/>Bar timer<br>
+    <input type="radio" name="visualstyle" value="pie"/>Pie timer<br>
+    <input type="checkbox" name="fullscreen"/>Full screen <br>
+    <input type="submit" value="Start"/>
+</form>
 <canvas id="canvas" width="1024" height="768"></canvas>
 
 <p>
