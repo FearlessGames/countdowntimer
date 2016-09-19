@@ -19,16 +19,32 @@
 
     <script type="application/javascript">
         var app = new App();
-        function startMe() {
+        function startMe(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+
             let elementById = document.getElementById('canvas');
             app.startTimer(elementById);
+            return false;
+        }
+    </script>
+
+    <script type="application/javascript">
+        function setup() {
+            var form = document.getElementById('timer-setup');
+            if (form.attachEvent) {
+                form.attachEvent("submit", startMe);
+            } else {
+                form.addEventListener("submit", startMe);
+            }
         }
     </script>
 
 </head>
-<!--<body onload="startMe();">-->
-<body>
-<form onsubmit="startMe()">
+<body onload="setup();">
+
+<form id="timer-setup">
     <input type="number" name="minutes"/>minutes <input type="number" name="seconds"/> seconds<br>
     <input type="radio" name="visualstyle" value="bar" checked/>Bar timer<br>
     <input type="radio" name="visualstyle" value="pie"/>Pie timer<br>
