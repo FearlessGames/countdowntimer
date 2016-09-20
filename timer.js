@@ -3,7 +3,7 @@ class Timer {
         this.startTimestamp = Date.now();
         this.durationInMillis = ((minutes * 60) + seconds) * 1000;
         this.endTimeStamp = this.startTimestamp + this.durationInMillis;
-
+        console.log("Started timer with %f:%f ends in %dms", minutes, seconds, this.durationInMillis);
     }
     
     set onDoneCallback(callback) {

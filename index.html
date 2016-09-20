@@ -23,9 +23,17 @@
             if (e.preventDefault) {
                 e.preventDefault();
             }
+            let minutes = parseInt(document.getElementById("minutes-field").value);
+            let seconds = parseInt(document.getElementById("seconds-field").value);
 
+            console.log(minutes + ":" + seconds);
+
+            let timeSetup = {
+                minutes: minutes,
+                seconds: seconds
+            };
             let elementById = document.getElementById('canvas');
-            app.startTimer(elementById);
+            app.startTimer(elementById, timeSetup);
             return false;
         }
     </script>
@@ -45,7 +53,7 @@
 <body onload="setup();">
 
 <form id="timer-setup">
-    <input type="number" name="minutes"/>minutes <input type="number" name="seconds"/> seconds<br>
+    <input type="number" name="minutes" id="minutes-field"/>minutes <input type="number" name="seconds" id="seconds-field"/> seconds<br>
     <input type="radio" name="visualstyle" value="bar" checked/>Bar timer<br>
     <input type="radio" name="visualstyle" value="pie"/>Pie timer<br>
     <input type="checkbox" name="fullscreen"/>Full screen <br>

@@ -1,9 +1,9 @@
 class App {
 
-    startTimer(canvasRenderingElement) {
+    startTimer(canvasRenderingElement, timeSetup) {
         this.canvas = new Canvas(canvasRenderingElement);
         this.canvas.resize();
-        let timer = new Timer(0, 10);
+        let timer = new Timer(timeSetup.minutes, timeSetup.seconds);
         const colorScheme = {
             barMain: "#ff6a00",
             barMainFlash: "#FA4092",
