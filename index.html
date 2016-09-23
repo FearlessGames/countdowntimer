@@ -18,6 +18,16 @@
     <script type="application/javascript" src="App.js"></script>
 
     <script type="application/javascript">
+        function hideSetup() {
+            document.getElementById("input-section").style.display = 'none';
+            document.getElementById("show-setup").style.display = 'block'
+        }
+
+        function showSetup() {
+            document.getElementById("input-section").style.display = 'block';
+            document.getElementById("show-setup").style.display = 'none'
+        }
+
         var app = new App();
         function startMe(e) {
             if (e.preventDefault) {
@@ -39,12 +49,13 @@
                 fullscreen: useFullscreen
             };
             let elementById = document.getElementById('canvas');
+            hideSetup();
             app.startTimer(elementById, timeSetup, visualSetup);
             return false;
         }
-    </script>
 
-    <script type="application/javascript">
+
+
         function setup() {
             var form = document.getElementById('timer-setup');
             if (form.attachEvent) {
@@ -52,23 +63,27 @@
             } else {
                 form.addEventListener("submit", startMe);
             }
+            showSetup();
         }
     </script>
 
 </head>
 <body onload="setup();">
-
-<form id="timer-setup">
-    <input type="number" name="minutes" id="minutes-field"/>minutes <input type="number" name="seconds" id="seconds-field"/> seconds<br>
-    <input type="radio"  name="visualstyle" value="bar" checked/>Bar timer<br>
-    <input type="radio"  name="visualstyle" value="pie"/>Pie timer<br>
-    <input type="checkbox" id="fullscreen" name="fullscreen"/>Full screen <br>
-    <input type="submit" value="Start"/>
-</form>
+<div id="input-section">
+    <form id="timer-setup">
+        <input type="number" name="minutes" id="minutes-field"/>minutes <input type="number" name="seconds" id="seconds-field"/> seconds<br>
+        <input type="radio"  name="visualstyle" value="bar" checked/>Bar timer<br>
+        <input type="radio"  name="visualstyle" value="pie"/>Pie timer<br>
+        <input type="checkbox" id="fullscreen" name="fullscreen"/>Full screen <br>
+        <input type="submit" value="Start"/>
+    </form>
+</div>
 <canvas id="canvas" width="1024" height="768"></canvas>
 
+<div id="show-setup">
 <p>
-    <button onclick="app.goFullScreen();">Go Fullscreen</button>
+    <button onclick="showSetup();">Show input</button>
 </p>
+</div>
 </body>
 </html>
