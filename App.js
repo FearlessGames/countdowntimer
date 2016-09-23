@@ -1,6 +1,6 @@
 class App {
 
-    startTimer(canvasRenderingElement, timeSetup) {
+    startTimer(canvasRenderingElement, timeSetup, visualStyle) {
         this.canvas = new Canvas(canvasRenderingElement);
         this.canvas.resize();
         let timer = new Timer(timeSetup.minutes, timeSetup.seconds);
@@ -10,8 +10,12 @@ class App {
             barBorder: "#464646",
             text: "#00b67d"
         };
-        //let bar = new BarTimer(timer, this.canvas, colorScheme);
-        let bar = new PieTimer(timer, this.canvas, colorScheme);
+        let bar = null;
+        if(visualStyle === "bar") {
+            bar = new BarTimer(timer, this.canvas, colorScheme);
+        } else if(visualStyle === "pie") {
+            bar = new PieTimer(timer, this.canvas, colorScheme);
+        }
 
         let callback = function () {
             bar.render();
