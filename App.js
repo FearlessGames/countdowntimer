@@ -1,6 +1,10 @@
 class App {
 
-    startTimer(canvasRenderingElement, timeSetup, visualStyle) {
+    goFullScreen() {
+        this.canvas.goFullScreen();
+    }
+
+    startTimer(canvasRenderingElement, timeSetup, visualSetup) {
         this.canvas = new Canvas(canvasRenderingElement);
         this.canvas.resize();
         let timer = new Timer(timeSetup.minutes, timeSetup.seconds);
@@ -11,10 +15,13 @@ class App {
             text: "#00b67d"
         };
         let bar = null;
-        if(visualStyle === "bar") {
+        if(visualSetup.style === "bar") {
             bar = new BarTimer(timer, this.canvas, colorScheme);
-        } else if(visualStyle === "pie") {
+        } else if(visualSetup.style === "pie") {
             bar = new PieTimer(timer, this.canvas, colorScheme);
+        }
+        if(visualSetup.fullscreen) {
+            this.goFullScreen();
         }
 
         let callback = function () {
@@ -23,10 +30,4 @@ class App {
         };
         window.requestAnimationFrame(callback);
     }
-
-    goFullScreen() {
-        this.canvas.goFullScreen();
-    }
-
-
 }

@@ -26,15 +26,20 @@
             let minutes = parseInt(document.getElementById("minutes-field").value);
             let seconds = parseInt(document.getElementById("seconds-field").value);
             let visualStyle = document.querySelector('input[name="visualstyle"]:checked').value;
+            let useFullscreen = document.getElementById("fullscreen").checked;
 
-            console.log(minutes + ":" + seconds);
+            console.log(useFullscreen);
 
             let timeSetup = {
                 minutes: minutes,
                 seconds: seconds
             };
+            let visualSetup = {
+                style: visualStyle,
+                fullscreen: useFullscreen
+            };
             let elementById = document.getElementById('canvas');
-            app.startTimer(elementById, timeSetup, visualStyle);
+            app.startTimer(elementById, timeSetup, visualSetup);
             return false;
         }
     </script>
@@ -57,7 +62,7 @@
     <input type="number" name="minutes" id="minutes-field"/>minutes <input type="number" name="seconds" id="seconds-field"/> seconds<br>
     <input type="radio"  name="visualstyle" value="bar" checked/>Bar timer<br>
     <input type="radio"  name="visualstyle" value="pie"/>Pie timer<br>
-    <input type="checkbox" name="fullscreen"/>Full screen <br>
+    <input type="checkbox" id="fullscreen" name="fullscreen"/>Full screen <br>
     <input type="submit" value="Start"/>
 </form>
 <canvas id="canvas" width="1024" height="768"></canvas>
